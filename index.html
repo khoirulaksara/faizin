@@ -32,51 +32,7 @@
 
   <script>
     const url = 'https://script.googleusercontent.com/macros/echo?user_content_key=xI0Q9PGEMFLdE2o7nkUgTHp4MSpMfEaB_L7xso-5qX0Fu1WxduMXlVgvOBB3wcCwgQ9GMlVihdy3-SDRKmdoJct-hUSB7JONm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnDERAYI7GVR7mOwYK6AHKqbtA-yKmH_PT-VcjxTGdeOwLRSd8u5PYJaNRAxQL6aJbCLtVcRuZ2qfn-BBk9mInPtzTve3P5jqFtz9Jw9Md8uu&lib=MBCEpX0YwxAOYlInpZo9y7ir1SjKmEcgo';
-
-    // Mengambil data dari API
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        const tableBody = document.querySelector('tbody');
-        data.forEach(obj => {
-          const row = tableBody.insertRow();
-          row.insertCell(0).appendChild(document.createTextNode(obj.no));
-          row.insertCell(1).appendChild(document.createTextNode(obj.nama));
-          row.insertCell(2).appendChild(document.createTextNode(obj.alamat));
-          // Kolom 4 (link) tersembunyi
-          const linkCell = row.insertCell(3);
-          linkCell.classList.add('hidden-column');
-          linkCell.appendChild(document.createTextNode(obj.link));
-          // Kolom 5 (txt) tersembunyi
-          const txtCell = row.insertCell(4);
-          txtCell.classList.add('hidden-column');
-          txtCell.appendChild(document.createTextNode(obj.txt));
-          const buttonCell = row.insertCell(5);
-          const button = document.createElement('button');
-          button.className = 'btn btn-primary';
-          button.innerHTML = 'Salin';
-          button.addEventListener('click', function() {
-            // Salin teks dari kolom nomor 5
-            const textToCopy = obj.txt;
-            navigator.clipboard.writeText(textToCopy).then(() => {
-              // Do nothing on successful copy
-              const tooltip = new bootstrap.Tooltip(button, {
-                title: 'Berhasil di copy',
-                placement: 'top',
-                trigger: 'manual'
-              });
-              tooltip.show();
-              setTimeout(function() {
-                tooltip.hide();
-              }, 2000); // Hide the tooltip after 2 seconds
-            }).catch(() => {
-              alert('Gagal menyalin teks!');
-            });
-          });
-          buttonCell.appendChild(button);
-        });
-      })
-      .catch(error => console.log('Terjadi kesalahan:', error));
+    fetch(url).then(e=>e.json()).then(e=>{let t=document.querySelector("tbody");e.forEach(e=>{let l=t.insertRow();l.insertCell(0).appendChild(document.createTextNode(e.no)),l.insertCell(1).appendChild(document.createTextNode(e.nama)),l.insertCell(2).appendChild(document.createTextNode(e.alamat));let n=l.insertCell(3);n.classList.add("hidden-column"),n.appendChild(document.createTextNode(e.link));let a=l.insertCell(4);a.classList.add("hidden-column"),a.appendChild(document.createTextNode(e.txt));let i=l.insertCell(5),d=document.createElement("button");d.className="btn btn-primary",d.innerHTML="Salin",d.addEventListener("click",function(){let t=e.txt;navigator.clipboard.writeText(t).then(()=>{let e=new bootstrap.Tooltip(d,{title:"Berhasil di copy",placement:"top",trigger:"manual"});e.show(),setTimeout(function(){e.hide()},2e3)}).catch(()=>{alert("Gagal menyalin teks!")})}),i.appendChild(d)})}).catch(e=>console.log("Terjadi kesalahan:",e));
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
