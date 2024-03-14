@@ -27,55 +27,13 @@
         <!-- Data will be populated here -->
       </tbody>
     </table>
+    <div id="paginationContainer" class="mt-3">
+      <!-- Pagination buttons will be added here -->
+    </div>
   </div>
 
   <script>
-    const url = 'https://script.googleusercontent.com/macros/echo?user_content_key=xI0Q9PGEMFLdE2o7nkUgTHp4MSpMfEaB_L7xso-5qX0Fu1WxduMXlVgvOBB3wcCwgQ9GMlVihdy3-SDRKmdoJct-hUSB7JONm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnDERAYI7GVR7mOwYK6AHKqbtA-yKmH_PT-VcjxTGdeOwLRSd8u5PYJaNRAxQL6aJbCLtVcRuZ2qfn-BBk9mInPtzTve3P5jqFtz9Jw9Md8uu&lib=MBCEpX0YwxAOYlInpZo9y7ir1SjKmEcgo';
-
-    // Mengambil data dari API
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        const tableBody = document.querySelector('tbody');
-        data.forEach(obj => {
-          const row = tableBody.insertRow();
-          row.insertCell(0).appendChild(document.createTextNode(obj.no));
-          row.insertCell(1).appendChild(document.createTextNode(obj.nama));
-          row.insertCell(2).appendChild(document.createTextNode(obj.alamat));
-          // Kolom 4 (link) tersembunyi
-          const linkCell = row.insertCell(3);
-          linkCell.classList.add('hidden-column');
-          linkCell.appendChild(document.createTextNode(obj.link));
-          // Kolom 5 (txt) tersembunyi
-          const txtCell = row.insertCell(4);
-          txtCell.classList.add('hidden-column');
-          txtCell.appendChild(document.createTextNode(obj.txt));
-          const buttonCell = row.insertCell(5);
-          const button = document.createElement('button');
-          button.className = 'btn btn-primary';
-          button.innerHTML = 'Salin';
-          button.addEventListener('click', function() {
-            // Salin teks dari kolom nomor 5
-            const textToCopy = obj.txt;
-            navigator.clipboard.writeText(textToCopy).then(() => {
-              // Do nothing on successful copy
-              const tooltip = new bootstrap.Tooltip(button, {
-                title: 'Berhasil di copy',
-                placement: 'top',
-                trigger: 'manual'
-              });
-              tooltip.show();
-              setTimeout(function() {
-                tooltip.hide();
-              }, 2000); // Hide the tooltip after 2 seconds
-            }).catch(() => {
-              alert('Gagal menyalin teks!');
-            });
-          });
-          buttonCell.appendChild(button);
-        });
-      })
-      .catch(error => console.log('Terjadi kesalahan:', error));
+    const url="https://script.googleusercontent.com/macros/echo?user_content_key=xI0Q9PGEMFLdE2o7nkUgTHp4MSpMfEaB_L7xso-5qX0Fu1WxduMXlVgvOBB3wcCwgQ9GMlVihdy3-SDRKmdoJct-hUSB7JONm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnDERAYI7GVR7mOwYK6AHKqbtA-yKmH_PT-VcjxTGdeOwLRSd8u5PYJaNRAxQL6aJbCLtVcRuZ2qfn-BBk9mInPtzTve3P5jqFtz9Jw9Md8uu&lib=MBCEpX0YwxAOYlInpZo9y7ir1SjKmEcgo";fetch("https://script.googleusercontent.com/macros/echo?user_content_key=xI0Q9PGEMFLdE2o7nkUgTHp4MSpMfEaB_L7xso-5qX0Fu1WxduMXlVgvOBB3wcCwgQ9GMlVihdy3-SDRKmdoJct-hUSB7JONm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnDERAYI7GVR7mOwYK6AHKqbtA-yKmH_PT-VcjxTGdeOwLRSd8u5PYJaNRAxQL6aJbCLtVcRuZ2qfn-BBk9mInPtzTve3P5jqFtz9Jw9Md8uu&lib=MBCEpX0YwxAOYlInpZo9y7ir1SjKmEcgo").then(e=>e.json()).then(e=>{let t=document.getElementById("tableBody"),n=1;function l(n,l){t.innerHTML="";for(let o=n;o<l;o++){let a=t.insertRow();a.insertCell(0).appendChild(document.createTextNode(e[o].no)),a.insertCell(1).appendChild(document.createTextNode(e[o].nama)),a.insertCell(2).appendChild(document.createTextNode(e[o].alamat));let c=a.insertCell(3),i=document.createElement("button");i.className="btn btn-primary",i.innerHTML="Salin",c.appendChild(i),i.addEventListener("click",function(){let t=e[o].txt;navigator.clipboard.writeText(t).then(()=>{let e=new bootstrap.Tooltip(i,{title:"Berhasil di copy",placement:"top",trigger:"manual"});e.show(),setTimeout(function(){e.hide()},2e3)}).catch(()=>{alert("Gagal menyalin teks!")})})}}function o(){let t=Math.ceil(e.length/10);function o(t){n=t;let o=(n-1)*10,a=Math.min(o+10,e.length);l(o,a)}!function e(){let n=document.getElementById("paginationContainer");for(let l=1;l<=t;l++){let a=document.createElement("button");a.textContent=l,a.className="btn btn-outline-primary mx-1",a.addEventListener("click",()=>o(l)),n.appendChild(a)}}(),o(n)}o()}).catch(e=>console.log("Terjadi kesalahan:",e));
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
